@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TechBridge — Digital Quest (3 Levels)</title>
+<style>
+:root{--ink:#10233b;--blue:#1269dc;--cyan:#48c8f5;--lime:#b9f36a;--paper:#f6fbff;--muted:#6c829a;--red:#ff6b6b}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#081426;color:#fff;display:grid;min-height:100vh;place-items:center;padding:14px}
+.shell{width:min(100%,1000px);border-radius:22px;overflow:hidden;background:#10253f;box-shadow:0 25px 80px #0008;border:1px solid #ffffff16}
+.top{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:linear-gradient(110deg,#112e53,#123d68);gap:10px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:10px}.logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(140deg,#56e2ff,#3875ff);display:grid;place-items:center;font-weight:900;color:#08223d}.brand h1{font-size:17px;margin:0;letter-spacing:.3px}.brand p{font-size:11px;color:#b9d6f5;margin:2px 0 0}.stats{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.stat{padding:7px 11px;background:#ffffff12;border:1px solid #ffffff17;border-radius:12px;font-size:11px;color:#c8ddf5}.stat strong{color:#fff;font-size:14px;margin-left:4px}
+.home-link{padding:8px 12px;background:#ffffff18;border:1px solid #ffffff28;border-radius:12px;color:#fff;text-decoration:none;font-size:12px;font-weight:700;transition:.2s}.home-link:hover{background:#ffffff28}
+.game-wrap{position:relative;background:#a6dff5;overflow:hidden}.game{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#a6dff5}.hud{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;pointer-events:none;gap:8px}.hud-chip{background:#0b2344d9;border:1px solid #ffffff22;border-radius:11px;padding:8px 11px;font-size:12px;box-shadow:0 4px 15px #133a5320}.mission-label{font-weight:700;color:#d6f58b;letter-spacing:.5px}.overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:14px;background:#06203b65}.panel{width:min(470px,95%);background:#f9fdff;color:#12304e;border-radius:18px;box-shadow:0 18px 50px #08254455;padding:20px;border:1px solid #dcecf7}.panel h2{margin:0 0 8px;font-size:20px}.panel p{margin:0 0 14px;color:#506b84;font-size:13px;line-height:1.5}.badge{display:inline-block;background:#e6f5ff;color:#1465c4;border-radius:100px;padding:5px 9px;font-size:10px;font-weight:800;letter-spacing:.6px;margin-bottom:9px}.answers{display:grid;gap:8px}.answer{border:1px solid #d6e5f1;border-radius:12px;padding:11px 12px;background:white;text-align:left;font:inherit;color:#183854;cursor:pointer;transition:.15s}.answer:hover{border-color:#4aa3f5;background:#f1f9ff;transform:translateY(-1px)}.answer:disabled{cursor:default;opacity:.95}.feedback{margin-top:10px;padding:10px 12px;border-radius:11px;font-size:12px;line-height:1.45}.feedback.good{background:#e7f9e8;color:#225b30}.feedback.bad{background:#fff0e8;color:#8a4824}.action{border:0;border-radius:11px;padding:11px 16px;background:#1769d3;color:white;font-weight:750;cursor:pointer;margin-top:12px;margin-right:6px}.action:hover{filter:brightness(1.06)}.action.secondary{background:#e2e8f0;color:#182b49}.level-select{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}.level-btn{border:1px solid #cbd5e1;background:#f8fafc;color:#10233b;padding:8px 12px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;transition:.15s}.level-btn:hover{border-color:#1769d3;background:#eff6ff}.start-panel{text-align:center}.start-panel p{font-size:14px}.controls{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;background:#10253f}.help{font-size:12px;color:#bfd5ec;line-height:1.45}.pad{display:flex;gap:8px}.pad button{background:#ffffff12;border:1px solid #ffffff25;color:white;border-radius:11px;padding:10px 14px;font-size:17px;min-width:46px;cursor:pointer;touch-action:manipulation}.pad button:active{background:#2b73c8}.footer{padding:10px 18px;background:#0b1d32;color:#7994b2;font-size:10px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}.hide{display:none!important}
+@media(max-width:600px){body{padding:6px}.shell{border-radius:15px}.top{padding:12px}.brand h1{font-size:15px}.stats{gap:5px}.stat{padding:6px 8px;font-size:10px}.stat strong{font-size:12px}.controls{padding:10px 12px}.help{font-size:10px;max-width:48%}.pad button{min-width:40px;padding:9px 11px}.panel{padding:15px}.panel h2{font-size:17px}.answer{padding:10px;font-size:13px}}
+
+/* ---- Mobile improvements ---- */
+.pad button,.answer,.action,.level-btn{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+@media(max-width:700px){
+body{display:block;padding:6px;min-height:100dvh}
+.shell{width:100%}
+.overlay{position:fixed;inset:0;z-index:50;overflow-y:auto;align-items:flex-start;background:#06203bdd;padding:12px}
+.panel{margin:auto;width:100%}
+.hud{top:6px;left:6px;right:6px}.hud-chip{font-size:10px;padding:5px 8px}.hud .hud-chip:last-child{display:none}
+.controls{flex-direction:column;align-items:stretch;padding:12px}
+.help{max-width:none;text-align:center}
+.pad{justify-content:center;gap:14px}
+.pad button{flex:1;max-width:100px;min-height:62px;font-size:24px}
+.answer{min-height:48px}.action{min-height:46px}.level-btn{min-height:42px}.home-link{padding:10px 14px}
+}
+@media(max-height:520px) and (orientation:landscape){.game{width:auto;max-width:100%;max-height:68vh;margin:0 auto}}
+</style>
+</head>
+<body>
+<div class="shell">
+ <header class="top">
+  <div class="brand"><div class="logo">TB</div><div><h1>TechBridge · Digital Quest</h1><p>3-Level Interactive Digital Literacy Adventure</p></div></div>
+  <div class="stats">
+    <div class="stat">LEVEL <strong id="levelStat">1/3</strong></div>
+    <div class="stat">SCORE <strong id="score">0</strong></div>
+    <div class="stat">LIVES <strong id="lives">♥♥♥</strong></div>
+    <a href="index.html" class="home-link">← Home</a>
+  </div>
+ </header>
+ <div class="game-wrap">
+  <canvas class="game" id="game" width="960" height="540" aria-label="Digital Quest game scene"></canvas>
+  <div class="hud"><div class="hud-chip"><span class="mission-label" id="mission">LEVEL 1</span> <span id="progress">· Checkpoint 1/4</span></div><div class="hud-chip">Move <b>← →</b> · Jump <b>Space</b></div></div>
+
+  <!-- Intro Overlay -->
+  <div class="overlay" id="intro">
+    <div class="panel start-panel">
+      <div class="badge">3 LEVELS &bull; 12 CHALLENGES</div>
+      <h2>Would You Survive Online?</h2>
+      <p>Hop across platforms across <strong>3 themed levels</strong> covering all 5 TechBridge topics! Answer checkpoint questions to earn points and advance.</p>
+      <button class="action" id="start">Start from Level 1</button>
+      <div class="level-select">
+        <button class="level-btn" onclick="startLevel(0)">Lvl 1: Basics &amp; Literacy</button>
+        <button class="level-btn" onclick="startLevel(1)">Lvl 2: Online Safety</button>
+        <button class="level-btn" onclick="startLevel(2)">Lvl 3: E-Waste &amp; Community</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz Checkpoint Overlay -->
+  <div class="overlay hide" id="quizOverlay">
+    <div class="panel">
+      <div class="badge" id="quizBadge">CHECKPOINT</div>
+      <h2 id="qTitle">Challenge</h2>
+      <p id="question">Question text</p>
+      <div class="answers" id="answers"></div>
+      <div id="feedback" class="feedback hide"></div>
+      <button class="action hide" id="next">Continue</button>
+    </div>
+  </div>
+
+  <!-- Level Complete Overlay -->
+  <div class="overlay hide" id="levelOverlay">
+    <div class="panel start-panel">
+      <div class="badge" id="levelBadge">LEVEL CLEARED</div>
+      <h2 id="levelTitle">Stage Complete!</h2>
+      <p id="levelText"></p>
+      <button class="action" id="nextLevelBtn">Continue to Next Level →</button>
+    </div>
+  </div>
+
+  <!-- Final End Overlay -->
+  <div class="overlay hide" id="endOverlay">
+    <div class="panel start-panel">
+      <div class="badge">QUEST COMPLETE</div>
+      <h2 id="endTitle">Nice work!</h2>
+      <p id="endText"></p>
+      <button class="action" id="restart">Play Again from Level 1</button>
+    </div>
+  </div>
+ </div>
+ <div class="controls"><div class="help">Controls: use arrow keys / WASD to move and Space to jump. On a phone, use the big on-screen buttons (tip: turn your phone sideways for a bigger game). Reach the glowing checkpoint to answer a challenge.</div><div class="pad"><button id="left" aria-label="Move left">←</button><button id="jump" aria-label="Jump">↑</button><button id="right" aria-label="Move right">→</button></div></div>
+ <div class="footer"><span>TechBridge 3-Level Quest</span><span>Basics • Digital Literacy • Online Safety • E-Waste • Community Directory</span></div>
+</div>
+<script>
+const canvas=document.getElementById('game'),ctx=canvas.getContext('2d');
+const scoreEl=document.getElementById('score'),livesEl=document.getElementById('lives'),levelStatEl=document.getElementById('levelStat'),missionEl=document.getElementById('mission'),progressEl=document.getElementById('progress');
+const intro=document.getElementById('intro'),quizOverlay=document.getElementById('quizOverlay'),levelOverlay=document.getElementById('levelOverlay'),endOverlay=document.getElementById('endOverlay');
+
+const levels = [
+  {
+    name: "Level 1: Digital Basics & Literacy",
+    skyTop: "#a8e3f6",
+    skyBottom: "#68bfe6",
+    islandTop: "#ff7883",
+    islandSide: "#c82f45",
+    platSide: "#e34254",
+    platforms: [
+      {x:95,y:412,w:180,h:28},
+      {x:310,y:354,w:180,h:28},
+      {x:526,y:292,w:180,h:28},
+      {x:750,y:230,w:150,h:28},
+      {x:858,y:158,w:90,h:28}
+    ],
+    quizzes: [
+      {title:'L1 · Checkpoint 1 · Safe Browsing',question:'You want to visit an official government website. How can you tell the connection is encrypted and safer?',choices:['The page has lots of flashing ads','There is a padlock icon / https:// in the address bar','The link was forwarded in a random group chat','It asks you to download an unknown file first'],answer:1,why:'A padlock icon and https:// show that the connection between your browser and the website is encrypted.'},
+      {title:'L1 · Checkpoint 2 · File Management',question:'Where is the best place to organize school forms and important PDFs on a computer so you do not lose them?',choices:['Leave everything inside the Recycle Bin','Create clearly named folders inside Documents','Rename every file to "untitled"','Save them only inside temporary browser tabs'],answer:1,why:'Creating labeled folders inside your Documents folder keeps files organized and easy to find later.'},
+      {title:'L1 · Checkpoint 3 · Spotting Fake News',question:'A shocking post claims free cash is being given away if you click a link immediately. What should you do first?',choices:['Share it to all your contacts right away','Check official news outlets or the agency’s verified page','Enter your bank details to claim it','Trust it because it has many likes'],answer:1,why:'Always verify sensational claims using official websites or trusted news organizations before sharing or clicking.'},
+      {title:'L1 · Checkpoint 4 · Using AI Tools',question:'An AI tool gives you facts and citations for a school task. What should you do before using them?',choices:['Copy them directly without checking','Assume citations are real if they look formal','Verify the claims and sources, then write in your own words','Remove the citations to make the answer shorter'],answer:2,why:'AI can make mistakes or invent references. Check sources and explain the information in your own understanding.'}
+    ]
+  },
+  {
+    name: "Level 2: Cyber & Online Safety",
+    skyTop: "#fde68a",
+    skyBottom: "#f59e0b",
+    islandTop: "#34d399",
+    islandSide: "#059669",
+    platSide: "#0f766e",
+    platforms: [
+      {x:85,y:420,w:175,h:28},
+      {x:295,y:345,w:165,h:28},
+      {x:500,y:390,w:170,h:28},
+      {x:705,y:305,w:165,h:28},
+      {x:845,y:210,w:100,h:28}
+    ],
+    quizzes: [
+      {title:'L2 · Checkpoint 1 · The Suspicious Forward',question:'A friend sends a chain message: “Forward this to 10 people or your account will be deleted.” What is the safest response?',choices:['Forward it quickly so nothing happens','Open any link attached to prove it is real','Delete it and contact your friend through another method if needed','Reply with your password to confirm your account'],answer:2,why:'Chain messages that pressure you to forward or click are suspicious. Delete it and verify separately if your friend’s account was hacked.'},
+      {title:'L2 · Checkpoint 2 · The OTP Request',question:'A caller claims to be support staff and asks for the one-time password (OTP) sent to your phone. What should you do?',choices:['Share it because they know your name','Hang up and contact the organization using its official channel','Send a screenshot of the OTP instead','Ask them to call again and give it later'],answer:1,why:'Never share an OTP. Contact the organization through a number or website you independently know is official.'},
+      {title:'L2 · Checkpoint 3 · Strong Passwords',question:'Which of these is the strongest password for your primary email account?',choices:['juandelacruz2005','password123','T@guig_Tech#2026!','12345678'],answer:2,why:'Long passphrases combining uppercase, lowercase, numbers, and symbols are much harder for attackers to guess.'},
+      {title:'L2 · Checkpoint 4 · Public Wi-Fi Safety',question:'You are connected to free public Wi-Fi at a plaza or café. What should you avoid doing?',choices:['Reading public digital literacy guides','Checking weather updates','Logging into online banking or shopping accounts','Looking up library hours'],answer:2,why:'Public Wi-Fi networks are shared; avoid sensitive transactions like online banking or entering passwords on them.'}
+    ]
+  },
+  {
+    name: "Level 3: E-Waste & Community Hub",
+    skyTop: "#c4b5fd",
+    skyBottom: "#6366f1",
+    islandTop: "#38bdf8",
+    islandSide: "#0284c7",
+    platSide: "#1d4ed8",
+    platforms: [
+      {x:80,y:410,w:170,h:28},
+      {x:280,y:330,w:160,h:28},
+      {x:475,y:250,w:160,h:28},
+      {x:675,y:320,w:165,h:28},
+      {x:845,y:225,w:105,h:28}
+    ],
+    quizzes: [
+      {title:'L3 · Checkpoint 1 · Preparing an Old Phone',question:'You are donating an old phone that still has personal photos, accounts, and files. What should you do first?',choices:['Hand it over as-is','Back up what you need, sign out, and securely erase your data','Delete only one photo and leave the rest','Give the phone with your SIM and memory card inside'],answer:1,why:'Protect your privacy by backing up important files, signing out, removing SIM/storage cards, and performing a factory reset.'},
+      {title:'L3 · Checkpoint 2 · Safe Battery Disposal',question:'You found an old, slightly swollen phone battery in a drawer. How should you handle it?',choices:['Puncture it to flatten it out','Throw it in regular kitchen trash','Keep it away from heat and bring it whole to an official e-waste drop-off bin','Burn it outdoors'],answer:2,why:'Never puncture or burn batteries. Keep them intact and bring them to an official e-waste collection bin.'},
+      {title:'L3 · Checkpoint 3 · Shared Library Computers',question:'You just finished printing a form at a public library or barangay computer hub. What must you do before leaving?',choices:['Leave your email open for the next person','Save your password in the browser','Log out of all accounts and remove your flash drive','Turn off the monitor only'],answer:2,why:'Always sign out of every account and take your USB drive when using shared public computers.'},
+      {title:'L3 · Checkpoint 4 · Community Resource Directory',question:'Before visiting a local Tech4ED center, library, or barangay e-waste drop-off, what is the smartest step?',choices:['Show up at midnight without checking','Call or check their hours first and bring a valid ID','Bring zero identification','Assume all centers are open 24/7'],answer:1,why:'Checking operating hours ahead of time and bringing a valid ID saves you a wasted trip!' }
+    ]
+  }
+];
+
+let currentLevel=0,running=false,score=0,lives=3,checkpoint=0,answered=false,quizOpen=false,keys={},player={x:130,y:370,vx:0,vy:0,w:30,h:42,onGround:false};let last=0;
+
+function getLevel(){return levels[currentLevel];}
+
+function drawBackground(){
+ const lv=getLevel();
+ ctx.fillStyle=lv.skyTop;ctx.fillRect(0,0,960,540);
+ ctx.fillStyle='rgba(255,255,255,0.45)';
+ for(let i=0;i<7;i++){ctx.beginPath();ctx.ellipse(130+i*155,85+(i%3)*18,85,25,0,0,Math.PI*2);ctx.fill();}
+ ctx.fillStyle=lv.skyBottom;ctx.beginPath();ctx.moveTo(0,280);ctx.lineTo(960,235);ctx.lineTo(960,540);ctx.lineTo(0,540);ctx.closePath();ctx.fill();
+ for(let i=0;i<9;i++){let x=i*130-20,y=310+(i%4)*26;hex(x,y,110,42,lv.islandSide,lv.islandSide);hex(x,y-12,100,34,lv.islandTop,lv.islandSide);}
+}
+function hex(x,y,w,h,top,side){ctx.beginPath();ctx.moveTo(x-w/2,y);ctx.lineTo(x-w*.28,y-h);ctx.lineTo(x+w*.28,y-h);ctx.lineTo(x+w/2,y);ctx.lineTo(x+w*.28,y+h*.3);ctx.lineTo(x-w*.28,y+h*.3);ctx.closePath();ctx.fillStyle=side;ctx.fill();ctx.beginPath();ctx.moveTo(x-w/2,y-8);ctx.lineTo(x-w*.28,y-h);ctx.lineTo(x+w*.28,y-h);ctx.lineTo(x+w/2,y-8);ctx.lineTo(x+w*.28,y+6);ctx.lineTo(x-w*.28,y+6);ctx.closePath();ctx.fillStyle=top;ctx.fill();}
+function drawPlatforms(){
+ const lv=getLevel();
+ lv.platforms.forEach((p,i)=>{
+  hex(p.x+p.w/2,p.y,p.w,p.w*.28,'#f6fbff',lv.platSide);
+  ctx.fillStyle='#d4eaf6';ctx.beginPath();ctx.ellipse(p.x+p.w/2,p.y-12,p.w*.22,9,0,0,Math.PI*2);ctx.fill();
+  if(i===checkpoint+1){ctx.strokeStyle='#d4ff65';ctx.lineWidth=4;ctx.beginPath();ctx.arc(p.x+p.w/2,p.y-26,17,0,Math.PI*2);ctx.stroke();}
+ });
+}
+function drawPlayer(){let px=player.x,py=player.y;ctx.fillStyle='#124c98';ctx.beginPath();ctx.ellipse(px+player.w/2,py+player.h-2,17,6,0,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle='#236fc8';ctx.fillRect(px+4,py+12,22,24);ctx.fillStyle='#4abcf1';ctx.fillRect(px+7,py+5,16,14);ctx.fillStyle='#102c4d';ctx.fillRect(px+9,py+10,4,4);ctx.fillRect(px+17,py+10,4,4);ctx.fillStyle='#b9f36a';ctx.fillRect(px+13,py+18,5,3);ctx.fillStyle='#1b4b86';ctx.fillRect(px+1,py+30,9,10);ctx.fillRect(px+20,py+30,9,10);ctx.fillStyle='#53d3f6';ctx.fillRect(px+12,py-2,6,7);}
+function draw(){
+ const lv=getLevel();
+ drawBackground();drawPlatforms();drawPlayer();
+ lv.platforms.slice(1,5).forEach((p,i)=>{
+  if(i>=checkpoint){
+   ctx.fillStyle='#ffd35b';ctx.beginPath();ctx.arc(p.x+p.w/2,p.y-48,9,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#fff2a8';ctx.lineWidth=2;ctx.stroke();
+  }
+ });
+ if(!running&&!quizOpen){ctx.fillStyle='#0f2942';ctx.font='bold 18px system-ui';ctx.fillText(lv.name+' — Reach the glowing checkpoints!',35,505);}
+}
+function update(dt){
+ if(!running||quizOpen)return;
+ const lv=getLevel();
+ let speed=220;player.vx=0;
+ if(keys.ArrowRight||keys.d)player.vx=speed;
+ if(keys.ArrowLeft||keys.a)player.vx=-speed;
+ if((keys.Space||keys.ArrowUp||keys.w)&&player.onGround){player.vy=-400;player.onGround=false;keys.Space=false;keys.ArrowUp=false;keys.w=false;}
+ player.x+=player.vx*dt;player.vy+=720*dt;player.y+=player.vy*dt;player.onGround=false;
+ lv.platforms.forEach(p=>{if(player.vy>=0&&player.x+player.w>p.x&&player.x<p.x+p.w&&player.y+player.h>=p.y-25&&player.y+player.h<=p.y+15){player.y=p.y-25-player.h;player.vy=0;player.onGround=true;}});
+ if(player.x<0)player.x=0;if(player.x>930)player.x=930;
+ let cp=lv.platforms[checkpoint+1];
+ if(cp&&player.x+player.w>cp.x+cp.w*.25&&player.x<cp.x+cp.w*.75&&player.y+player.h>cp.y-55&&player.y<cp.y+5){openQuiz();}
+ if(player.y>580){loseLife();}
+}
+function loop(t){let dt=Math.min((t-last)/1000,.035)||0;last=t;update(dt);draw();requestAnimationFrame(loop);}
+function openQuiz(){
+ const lv=getLevel();
+ if(quizOpen||checkpoint>=lv.quizzes.length)return;
+ quizOpen=true;answered=false;running=false;
+ const q=lv.quizzes[checkpoint];
+ document.getElementById('quizBadge').textContent=`LEVEL ${currentLevel+1} · CHECKPOINT ${checkpoint+1}/${lv.quizzes.length}`;
+ document.getElementById('qTitle').textContent=q.title;
+ document.getElementById('question').textContent=q.question;
+ document.getElementById('feedback').className='feedback hide';
+ document.getElementById('feedback').textContent='';
+ document.getElementById('next').classList.add('hide');
+ const box=document.getElementById('answers');box.innerHTML='';
+ q.choices.forEach((c,i)=>{let b=document.createElement('button');b.className='answer';b.textContent=['A','B','C','D'][i]+'. '+c;b.onclick=()=>choose(i);box.appendChild(b);});
+ quizOverlay.classList.remove('hide');
+}
+function choose(i){
+ if(answered)return;answered=true;
+ const lv=getLevel(),q=lv.quizzes[checkpoint],fb=document.getElementById('feedback');
+ const correct=i===q.answer;
+ [...document.querySelectorAll('.answer')].forEach(b=>b.disabled=true);
+ if(correct){score+=100;fb.className='feedback good';fb.textContent='Correct! +100 points. '+q.why;}
+ else{lives--;fb.className='feedback bad';fb.textContent='Not quite. -1 life. '+q.why;}
+ scoreEl.textContent=score;livesEl.textContent='♥'.repeat(lives)+'♡'.repeat(3-lives);
+ document.getElementById('next').classList.remove('hide');
+ if(lives<=0)document.getElementById('next').textContent='See Results';
+ else if(checkpoint===lv.quizzes.length-1)document.getElementById('next').textContent=(currentLevel<levels.length-1)?'Complete Level':'Finish All Levels';
+ else document.getElementById('next').textContent='Next Checkpoint';
+}
+function nextCheckpoint(){
+ const lv=getLevel();
+ quizOverlay.classList.add('hide');quizOpen=false;
+ if(lives<=0){finish(false);return;}
+ if(checkpoint>=lv.quizzes.length-1){
+  if(currentLevel<levels.length-1){
+   openLevelComplete();
+  }else{
+   finish(true);
+  }
+  return;
+ }
+ checkpoint++;
+ progressEl.textContent=`· Checkpoint ${checkpoint+1}/${lv.quizzes.length}`;
+ const p=lv.platforms[checkpoint];player.x=p.x+20;player.y=p.y-80;player.vy=0;running=true;
+}
+function openLevelComplete(){
+ running=false;
+ document.getElementById('levelBadge').textContent=`LEVEL ${currentLevel+1} OF ${levels.length} CLEARED!`;
+ document.getElementById('levelTitle').textContent=getLevel().name+' Complete!';
+ document.getElementById('levelText').textContent=`Awesome job! Your current score is ${score} points. Ready for ${levels[currentLevel+1].name}?`;
+ levelOverlay.classList.remove('hide');
+}
+function loseLife(){
+ const lv=getLevel();
+ lives--;livesEl.textContent='♥'.repeat(lives)+'♡'.repeat(3-lives);
+ player.x=lv.platforms[Math.max(0,checkpoint)].x+15;player.y=lv.platforms[Math.max(0,checkpoint)].y-80;player.vy=0;
+ if(lives<=0)finish(false);
+}
+function finish(completedAll){
+ running=false;quizOpen=false;quizOverlay.classList.add('hide');levelOverlay.classList.add('hide');endOverlay.classList.remove('hide');
+ let title=completedAll?(score>=1000?'Grand Digital Champion!':'Quest Master!'):'Keep Training!';
+ document.getElementById('endTitle').textContent=title;
+ document.getElementById('endText').textContent=`You finished with ${score} points across ${currentLevel+1} level(s). Replay any time to sharpen your digital literacy skills!`;
+}
+function loadLevel(lvlIndex, resetStats){
+ currentLevel=lvlIndex;
+ const lv=getLevel();
+ if(resetStats){score=0;lives=3;}
+ checkpoint=0;
+ scoreEl.textContent=score;
+ livesEl.textContent='♥'.repeat(lives)+'♡'.repeat(3-lives);
+ levelStatEl.textContent=`${currentLevel+1}/${levels.length}`;
+ missionEl.textContent=`LEVEL ${currentLevel+1}`;
+ progressEl.textContent=`· Checkpoint 1/${lv.quizzes.length}`;
+ player={x:lv.platforms[0].x+20,y:lv.platforms[0].y-80,vx:0,vy:0,w:30,h:42,onGround:false};
+ intro.classList.add('hide');endOverlay.classList.add('hide');quizOverlay.classList.add('hide');levelOverlay.classList.add('hide');
+ quizOpen=false;running=true;
+}
+function startLevel(lvlIndex){loadLevel(lvlIndex,true);}
+function key(e,down){keys[e.key]=down;if(['ArrowLeft','ArrowRight','ArrowUp',' '].includes(e.key))e.preventDefault();if(e.key===' '&&down)keys.Space=true;}
+window.addEventListener('keydown',e=>key(e,true));window.addEventListener('keyup',e=>key(e,false));
+function holdButton(id,k){let el=document.getElementById(id);el.addEventListener('pointerdown',e=>{e.preventDefault();keys[k]=true;});['pointerup','pointercancel','pointerleave'].forEach(ev=>el.addEventListener(ev,()=>keys[k]=false));}
+holdButton('left','ArrowLeft');holdButton('right','ArrowRight');document.getElementById('jump').addEventListener('pointerdown',e=>{e.preventDefault();keys.Space=true;});
+document.getElementById('start').onclick=()=>loadLevel(0,true);
+document.getElementById('next').onclick=nextCheckpoint;
+document.getElementById('nextLevelBtn').onclick=()=>loadLevel(currentLevel+1,false);
+document.getElementById('restart').onclick=()=>loadLevel(0,true);
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>

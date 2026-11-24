@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#158068">
+  <title>TechBridge | Empowering Every Generation Through Digital Literacy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <span class="brand-icon">🌐</span>
+        TechBridge
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav">☰</button>
+
+      <nav id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="tutorials.html">Tutorials</a></li>
+          <li><a href="literacy.html">Literacy Guides</a></li>
+          <li><a href="safety.html">Online Safety</a></li>
+          <li><a href="ewaste.html">E-Waste &amp; Recycling</a></li>
+          <li><a href="directory.html">Directory</a></li>
+        </ul>
+      </nav>
+
+      <a href="quiz.html" class="btn-orange">🎮 Play Digital Quest</a>
+    </div>
+  </header>
+
+  <section class="hero-wrapper">
+    <div class="hero-left">
+      <div class="pill-badge">💚 Start Your Digital Learning Journey Today!</div>
+      <h1>Empowering Every Generation Through <span>Digital Literacy</span></h1>
+      <p>Technology is an important part of everyday life, and learning how to use it properly can open new opportunities. TechBridge provides simple learning resources to help you develop essential digital skills, understand online safety, and become a responsible technology user.</p>
+
+      <div class="hero-actions">
+        <a href="tutorials.html" class="btn-orange">View Tutorials</a>
+        <a href="directory.html" class="btn-outline">📍 Explore Directory</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <h4>5 Topics</h4>
+          <span>Basics to E-Waste</span>
+        </div>
+        <div class="stat-item">
+          <h4>No Login</h4>
+          <span>Required for Quizzes</span>
+        </div>
+        <div class="stat-item">
+          <h4>Taguig &amp; NCR</h4>
+          <span>Local Community Hub</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-header">
+        <div class="quiz-status"><span class="dot"></span> Interactive Practice</div>
+        <span class="quiz-tag">Self-Paced Quiz</span>
+      </div>
+
+      <div class="quiz-inner">
+        <div class="quiz-question">🛡️ Q: What makes a password strong?</div>
+
+        <div class="quiz-option" onclick="selectOption(this, false)">
+          <span>Your birthday and pet's name</span>
+          <span class="radio-circle"></span>
+        </div>
+
+        <div class="quiz-option selected" onclick="selectOption(this, true)">
+          <span>A mix of letters, numbers, &amp; symbols</span>
+          <span class="radio-circle"></span>
+        </div>
+
+        <div class="quiz-option" onclick="selectOption(this, false)">
+          <span>The word "password123"</span>
+          <span class="radio-circle"></span>
+        </div>
+      </div>
+
+      <div class="quiz-footer-note" id="quizFeedback">✅ Correct! Instant grading saved in your browser!</div>
+    </div>
+  </section>
+
+  <main class="container" id="modules">
+    <h2 class="section-title">Choose What You Want to Learn</h2>
+    <p class="section-subtitle">Whether you are starting from the basics or improving your existing knowledge, there is always something new to learn. Hover and pick a topic below.</p>
+
+    <div class="grid">
+      <!-- Topic 1 -->
+      <article class="card topic-card">
+        <div>
+          <span class="pill-badge">💻 Basic Computer Skills</span>
+          <h3>Tutorials: Computer &amp; Internet</h3>
+          <p>Understand computer parts, internet browsing, email communication, and document creation through easy step-by-step tutorials.</p>
+        </div>
+        <a href="tutorials.html" class="btn-outline">View Tutorials →</a>
+      </article>
+
+      <!-- Topic 2 -->
+      <article class="card topic-card">
+        <div>
+          <span class="pill-badge">📚 Digital Literacy</span>
+          <h3>Literacy Guides</h3>
+          <p>Understand responsible and effective technology use, reliable information checking, and positive digital footprints.</p>
+        </div>
+        <a href="literacy.html" class="btn-outline">View Guides →</a>
+      </article>
+
+      <!-- Topic 3 -->
+      <article class="card topic-card">
+        <div>
+          <span class="pill-badge">🛡️ Online Safety</span>
+          <h3>Online Safety Education</h3>
+          <p>Learn how to recognize scams, create strong passwords, protect personal information, and enable two-factor authentication (2FA).</p>
+        </div>
+        <a href="safety.html" class="btn-outline">Safety Checklist →</a>
+      </article>
+
+      <!-- Topic 4 -->
+      <article class="card topic-card">
+        <div>
+          <span class="pill-badge">♻️ E-Waste Awareness</span>
+          <h3>E-Waste &amp; Tech Recycling</h3>
+          <p>Discover proper ways to manage and reduce electronic waste, protect the environment, and dispose of gadgets responsibly.</p>
+        </div>
+        <a href="ewaste.html" class="btn-outline">Recycling Guide →</a>
+      </article>
+
+      <!-- Topic 5 -->
+      <article class="card topic-card">
+        <div>
+          <span class="pill-badge">📍 Local Tech Resources</span>
+          <h3>Community Resource Directory</h3>
+          <p>Discover public libraries, computer training centers, community learning facilities, and e-waste collection locations near you.</p>
+        </div>
+        <a href="directory.html" class="btn-outline">Explore Directory →</a>
+      </article>
+    </div>
+
+    <!-- Explore Free Tutorials & Local Tech Resources Highlights -->
+    <section class="about-band" style="margin-top: 3rem;">
+      <div class="two-col-grid" style="margin-top: 0;">
+        <div>
+          <span class="pill-badge">🛠️ Explore Free Tutorials</span>
+          <h3 style="color: var(--navy); margin-bottom: 0.5rem;">Learn Technology Through Simple Tutorials</h3>
+          <p style="color: var(--text-body); font-size: 0.94rem; margin-bottom: 0.75rem;">Follow easy, step-by-step instructions and practice essential digital skills that can be useful in school, work, and everyday activities across <strong>Computer Basics</strong>, <strong>Internet Browsing</strong>, <strong>Email Communication</strong>, <strong>Document Creation</strong>, and <strong>Online Safety</strong>.</p>
+          <a href="tutorials.html" class="btn-orange">View Tutorials →</a>
+        </div>
+        <div>
+          <span class="pill-badge">🏘️ Local Tech Resources</span>
+          <h3 style="color: var(--navy); margin-bottom: 0.5rem;">Find Technology Resources Near Your Community</h3>
+          <p style="color: var(--text-body); font-size: 0.94rem; margin-bottom: 0.75rem;">Discover useful local resources that support technology education and digital learning—including public libraries, computer training centers, community learning facilities, and electronic waste collection locations.</p>
+          <a href="directory.html" class="btn-outline">Explore Directory →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About TechBridge & References -->
+    <section class="about-band">
+      <span class="pill-badge">ℹ️ About TechBridge</span>
+      <h2 class="section-title" style="font-size: 1.5rem;">About TechBridge, Our Goal &amp; References</h2>
+      <p style="color: var(--text-body); font-size: 0.95rem; margin-bottom: 0.75rem;"><strong>About TechBridge:</strong> TechBridge is an educational website designed to promote digital literacy and responsible technology use. It aims to provide accessible learning materials that help individuals develop basic computer skills, understand internet safety, and become more confident when using digital technology.</p>
+      <p style="color: var(--text-body); font-size: 0.95rem; margin-bottom: 0.75rem;"><strong>Our Goal:</strong> To make technology education easier to understand and more accessible by providing simple tutorials, informative guides, and useful community resources.</p>
+      <p style="color: var(--text-body); font-size: 0.95rem; margin-bottom: 1rem;"><strong>Our Message:</strong> Technology is for everyone. Through continuous learning and responsible use, everyone can become more confident in the digital world.</p>
+
+      <h4 style="color: var(--navy); margin-top: 1rem;">References</h4>
+      <ul class="ref-links">
+        <li>Microsoft Digital Literacy: <a href="https://www.microsoft.com/en-us/digital-literacy/" target="_blank" rel="noopener">https://www.microsoft.com/en-us/digital-literacy/</a></li>
+        <li>CISA Resources Collection (February 2024): <a href="https://www.cisa.gov/sites/default/files/2024-02/Resources%20Collection_02062024_508c.pdf" target="_blank" rel="noopener">https://www.cisa.gov/sites/default/files/2024-02/Resources%20Collection_02062024_508c.pdf</a></li>
+        <li>ITU Academy: Digital Transformation Centres Initiative: <a href="https://academy.itu.int/digital-skills-communities/digital-transformation-centres-initiative/" target="_blank" rel="noopener">https://academy.itu.int/digital-skills-communities/digital-transformation-centres-initiative/</a></li>
+        <li>ITU Academy: Digital Transformation Centres Resources: <a href="https://academy.itu.int/digital-skills-communities/digital-transformation-centres-initiative/dtc-resource" target="_blank" rel="noopener">https://academy.itu.int/digital-skills-communities/digital-transformation-centres-initiative/dtc-resource</a></li>
+        <li>Google, Be Internet Awesome (for educators): <a href="https://beinternetawesome.withgoogle.com/en_us/educators" target="_blank" rel="noopener">https://beinternetawesome.withgoogle.com/en_us/educators</a></li>
+        <li>DICT Region XIII, Narrative Report 2022 [link as supplied appears incomplete; verify]: <a href="https://caraga.dict.gov.ph/wp-content/uploads/2023/10/DICT-R13-Narrative-Report-2022" target="_blank" rel="noopener">https://caraga.dict.gov.ph/wp-content/uploads/2023/10/DICT-R13-Narrative-Report-2022</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>GECETH Final Project &bull; TechBridge Community Technology &amp; Digital Literacy</p>
+  </footer>
+
+  <script>
+    function selectOption(element, isCorrect) {
+      document.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+      element.classList.add('selected');
+      const feedback = document.getElementById('quizFeedback');
+      if (isCorrect) {
+        feedback.textContent = "✅ Correct! Mixing characters makes passwords hard to crack.";
+        feedback.style.color = "#158068";
+      } else {
+        feedback.textContent = "⚠️ Not quite—try a combination that is harder to guess!";
+        feedback.style.color = "#ea580c";
+      }
+    }
+  </script>
+
+  <script src="menu.js"></script>
+</body>
+</html>
